@@ -1,11 +1,11 @@
 import datetime
 
-class Field:
+class Name(Field):
     def __init__(self, value=None):
         self.__value = value
 
     def __str__(self):
-        return str(self.value)
+        return f"Name: {self.value}"
 
     def __repr__(self):
         return f"{type(self).__name__}(value={self.value!r})"
@@ -30,12 +30,12 @@ class Phone(Field):
 
     @property
     def value(self):
-        return f"+{self.__value}"
+        return f"+{self._Field__value}" if self._Field__value else None
 
     @value.setter
     def value(self, value):
         if self.validate(value):
-            self.__value = value
+            self._Field__value = value
         else:
             raise ValueError(f"Invalid phone number {value}")
 
@@ -51,12 +51,12 @@ class Birthday(Field):
 
     @property
     def value(self):
-        return datetime.datetime.strptime(self.__value, '%d.%m.%Y').date()
+        return datetime.datetime.strptime(self._Field__value, '%d.%m.%Y').date() if self._Field__value else None
 
     @value.setter
     def value(self, value):
         if self.validate(value):
-            self.__value = value
+            self._Field__value = value
         else:
             raise ValueError(f"Invalid birthday date {value}")
 
