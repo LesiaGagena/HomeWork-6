@@ -5,10 +5,10 @@ class Field:
         self.__value = value
 
     def __str__(self):
-        return str(self.__value)
+        return str(self.value)
 
     def __repr__(self):
-        return str(self)
+        return f"{type(self).__name__}(value={self.value!r})"
 
     def validate(self, value):
         return True
